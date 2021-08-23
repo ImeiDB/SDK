@@ -3,7 +3,11 @@
 namespace imeidb\sdk;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use imeidb\sdk\exceptions\BaseException;
+use Psr\Http\Message\ResponseInterface;
+
+require __DIR__ . '/vendor/autoload.php';
 
 class ImeiDBClient
 {
@@ -11,10 +15,13 @@ class ImeiDBClient
      * Destination BaseUrl
      * @var string
      */
-    protected $baseUrl = 'https://imeidb.xyz';
+    protected string $baseUrl = 'https://imeidb.xyz';
 
-    const FORMAT_JSON   = 'json';
-    const FORMAT_XML    = 'xml';
+    /**
+     * Supported formats
+     */
+    const FORMAT_JSON = 'json';
+    const FORMAT_XML = 'xml';
 
     /**
      * Please specify the token
@@ -22,12 +29,12 @@ class ImeiDBClient
      * @url https://imeidb.xyz/user - The token can be found here
      * @var string
      */
-    private $token;
+    private string $token;
 
     /**
      * @var Client
      */
-    private $client;
+    private Client $client;
 
     /**
      * ImeiDBClient constructor.
@@ -40,7 +47,7 @@ class ImeiDBClient
             $this->token = $token;
         }
 
-        if (!in_array($format, $this->getListOfSupportedFormats())) {
+        if (!in_array($format, $this->getFormats())) {
             return new BaseException('Format not supported');
         } else {
             $this->format = $format;
@@ -57,23 +64,35 @@ class ImeiDBClient
         ]);
     }
 
-    protected function getListOfSupportedFormats() {
-        return ['xml', 'json'];
+    /**
+     * Return list of available formats
+     *
+     * @return string[]
+     */
+    protected function getFormats(): array
+    {
+        return [self::FORMAT_JSON, self::FORMAT_XML];
     }
 
     /**
      * Returns the account balance
      */
-    public function getBalance () {
+    public function getBalance(): ResponseInterface
+    {
         return $this->client->get('https://imeidb.xyz/api/balance');
     }
 
     /**
      * @param $imei
-     * @return \Psr\Http\Message\ResponseInterface
-     * @throws \GuzzleHttp\Exception\GuzzleException
+     * @return ResponseInterface
+     * @throws GuzzleException
      */
-    public function getDecode($imei) {
-        return $this->client->get("https://imeidb.xyz/api/imei/${imei}");
+    public function getDecode($imei): ResponseInterface
+    {
+        return $this->client->get("https://imeidb.xyz/api/imei/", [
+            'query' => [
+                'token' => $imei
+            ]
+        ]);
     }
 }

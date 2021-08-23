@@ -16,5 +16,8 @@
         "classmap": [
             "src/"
         ]
+    },
+    "scripts": {
+        "phpunit": "./vendor/phpunit/phpunit"
     }
 }
