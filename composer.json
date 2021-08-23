@@ -1,0 +1,12 @@
+{
+    "name": "imeidb/sdk",
+    "authors": [
+        {
+            "name": "Aliaksandr Kistsen",
+            "email": "kistenalex@gmail.com"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0"
+    }
+}
