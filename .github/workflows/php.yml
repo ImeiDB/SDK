@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
+      IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
 
     steps:
     - uses: actions/checkout@v2
