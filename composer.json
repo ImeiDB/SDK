@@ -1,5 +1,6 @@
 {
     "name": "imeidb/sdk",
+    "description": "Simple and lightweight SDK for working with ImeiDB API",
     "license": "MIT",
     "authors": [
         {
