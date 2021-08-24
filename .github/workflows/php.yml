@@ -9,11 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
 
     steps:
     - uses: actions/checkout@v2
-      env:
-        IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
