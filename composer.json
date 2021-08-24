@@ -20,6 +20,7 @@
         ]
     },
     "scripts": {
-        "phpunit": "./vendor/phpunit/phpunit"
+        "phpunit": "./vendor/phpunit/phpunit",
+        "test": "phpunit tests/"
     }
 }
