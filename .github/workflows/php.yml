@@ -15,6 +15,9 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: environment
+      run: echo "export ENV=test" > ~/.bashrc
+
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
 
