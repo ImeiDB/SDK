@@ -5,7 +5,6 @@ namespace imeidb\sdk;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\GuzzleException;
 use imeidb\sdk\exceptions\BaseException;
-use imeidb\sdk\exceptions\IncorrectTokenException;
 use Psr\Http\Message\ResponseInterface;
 
 require __DIR__ . '/../vendor/autoload.php';
