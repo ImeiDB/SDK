@@ -9,12 +9,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      ENV: test
 
     steps:
     - uses: actions/checkout@v2
-
-    - name: Set envirenment
-      run: echo "ENV=test" >> $GITHUB_ENV
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
