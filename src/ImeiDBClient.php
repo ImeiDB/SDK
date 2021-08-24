@@ -7,7 +7,7 @@ use GuzzleHttp\Exception\GuzzleException;
 use imeidb\sdk\exceptions\BaseException;
 use Psr\Http\Message\ResponseInterface;
 
-require __DIR__ . '/vendor/autoload.php';
+require __DIR__ . '/../vendor/autoload.php';
 
 class ImeiDBClient
 {
@@ -32,6 +32,13 @@ class ImeiDBClient
     private string $token;
 
     /**
+     * Response format
+     *
+     * @var string
+     */
+    private string $format;
+
+    /**
      * @var Client
      */
     private Client $client;
@@ -41,27 +48,54 @@ class ImeiDBClient
      */
     public function __construct($token = '', $format = self::FORMAT_JSON)
     {
-        if (empty($token)) {
-            return new BaseException('Token does not specified');
-        } else {
-            $this->token = $token;
-        }
-
-        if (!in_array($format, $this->getFormats())) {
-            return new BaseException('Format not supported');
-        } else {
-            $this->format = $format;
-        }
+        $this->setToken($token);
+        $this->setFormat($format);
 
         $this->client = new Client([
             'baseUrl' => $this->baseUrl,
             'headers' => [
-                'X-Api-Key' => $this->token
+                'X-Api-Key' => $this->token,
             ],
             'query' => [
                 'format' => $this->format
             ]
         ]);
+    }
+
+    /**
+     * Set request token
+     *
+     * @param $token
+     * @throws BaseException
+     * @return ImeiDBClient
+     */
+    public function setToken($token): ImeiDBClient
+    {
+        if (empty($token)) {
+            throw new BaseException('Token does not specified');
+        } else {
+            $this->token = $token;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Set response format
+     *
+     * @param $format
+     * @throws BaseException
+     * @return $this
+     */
+    public function setFormat($format): ImeiDBClient
+    {
+        if (!in_array($format, $this->getFormats())) {
+            throw new BaseException('Format not supported');
+        } else {
+            $this->format = $format;
+        }
+
+        return $this;
     }
 
     /**
@@ -76,23 +110,30 @@ class ImeiDBClient
 
     /**
      * Returns the account balance
-     */
-    public function getBalance(): ResponseInterface
-    {
-        return $this->client->get('https://imeidb.xyz/api/balance');
-    }
-
-    /**
-     * @param $imei
+     *
+     * @param array $options
      * @return ResponseInterface
      * @throws GuzzleException
      */
-    public function getDecode($imei): ResponseInterface
+    public function getBalance($options = []): ResponseInterface
     {
-        return $this->client->get("https://imeidb.xyz/api/imei/", [
+        return $this->client->get('https://imeidb.xyz/api/balance', $options);
+    }
+
+    /**
+     * Decode imei
+     *
+     * @param $imei
+     * @param array $options
+     * @return ResponseInterface
+     * @throws GuzzleException
+     */
+    public function getDecode($imei, $options = []): ResponseInterface
+    {
+        return $this->client->get("https://imeidb.xyz/api/imei/", array_replace_recursive($options, [
             'query' => [
-                'token' => $imei
+                'imei' => $imei
             ]
-        ]);
+        ]));
     }
 }

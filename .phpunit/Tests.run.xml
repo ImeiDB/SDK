@@ -1,0 +1,11 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Tests" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
+    <CommandLine>
+      <PhpTestInterpreterSettings>
+        <option name="interpreterName" value="php:7.4-cli" />
+      </PhpTestInterpreterSettings>
+    </CommandLine>
+    <TestRunner class="ImeiDbClientTest" coverage_engine="PHPDBG" directory="$PROJECT_DIR$/tests" file="$PROJECT_DIR$/tests/ImeiDbClientTest.php" />
+    <method v="2" />
+  </configuration>
+</component>
