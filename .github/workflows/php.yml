@@ -29,6 +29,6 @@ jobs:
       run: composer install --prefer-dist --no-progress
 
     - name: Run test suite
-      run: composer run-script test
       env:
         IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
+      run: composer run-script test
