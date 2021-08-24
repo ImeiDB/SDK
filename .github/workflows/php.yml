@@ -10,9 +10,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env: # Set the secret as an input
-      IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
-
     steps:
     - uses: actions/checkout@v2
 
@@ -33,3 +30,5 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+      env: # Set the secret as an input
+        IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
