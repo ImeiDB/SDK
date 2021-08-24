@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
 
     steps:
     - uses: actions/checkout@v2
@@ -35,3 +33,5 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
+      env:
+        IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}

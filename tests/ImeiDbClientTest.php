@@ -14,7 +14,7 @@ final class ImeiDbClientTest extends TestCase
     {
         parent::setUp();
 
-        var_dump(getenv('IMEIDB_TOKEN'));
+        var_dump($_ENV);
 
         $this->client = new ImeiDBClient(getenv('ENV'));
     }
