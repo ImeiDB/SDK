@@ -43,6 +43,7 @@ use imeidb\sdk\ImeiDBClient;
 
 # Using initialize method
 $client = new ImeiDBClient('{YOUR_SECRET_TOKEN}', ImeiDBClient::FORMAT_XML);
+
 # or using dynamically change format
 $client->setFormat(ImeiDBClient::FORMAT_XML);
 ```
