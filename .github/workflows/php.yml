@@ -31,4 +31,4 @@ jobs:
     - name: Run test suite
       run: composer run-script test
       env: # Set the secret as an input
-        IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
+        IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
