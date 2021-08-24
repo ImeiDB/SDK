@@ -8,9 +8,7 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
 
@@ -29,7 +27,10 @@ jobs:
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
 
-    - name: Run test suite
-      env: # Set the secret as an input
-        IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
-      run: composer run-script test
+  test:
+    runs-on: ubuntu-latest
+    env: # Set the secret as an input
+      IMEIDB_TOKEN: ${{ secrets.IMEIDB_TOKEN }}
+    steps:
+      - name: Run test suite
+        run: composer run-script test
