@@ -1,7 +1,8 @@
 # ImeiDB SDK
 IMEIDB - big database that allows you to decrypt IMEI mobile devices and receive information about them.
 
-Website: https://imeidb.xyz
+- Website: https://imeidb.xyz
+- API link: https://imeidb.xyz/api
 
 ## Capability
 
