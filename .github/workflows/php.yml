@@ -12,6 +12,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
+      env:
+        IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
 
     - name: Validate composer.json and composer.lock
       run: composer validate --strict
@@ -30,5 +32,3 @@ jobs:
 
     - name: Run test suite
       run: composer run-script test
-      env:
-        IMEIDB_TOKEN: '${{ secrets.IMEIDB_TOKEN }}'
